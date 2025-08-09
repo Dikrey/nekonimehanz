@@ -23,9 +23,9 @@ import Typography from "@/components/ui/typography";
 import { useEffect, useState } from "react";
 
 export default function LastWatched() {
-  const [isVisible, setIsVisible] = useState(false);
   const lastWatched = getSavedEpisode();
   const router = useRouter();
+  const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
     setIsVisible(true);
@@ -64,55 +64,24 @@ export default function LastWatched() {
   return (
     <section className="container mx-auto px-4 py-6">
       {/* Header */}
-      <div className="mb-5 flex items-center justify-between">
-        <Typography.H3 className="bg-gradient-to-r from-purple-500 to-pink-500 bg-clip-text text-2xl font-bold text-transparent">
-          🎯 Last Watched
-        </Typography.H3>
+      <Typography.H3 className="mb-6 bg-gradient-to-r from-purple-500 to-pink-500 bg-clip-text text-center text-2xl font-bold text-transparent">
+        🎯 Last Watched
+      </Typography.H3>
 
-        <AlertDialog>
-          <AlertDialogTrigger asChild>
-            <Button
-              variant="destructive"
-              size="sm"
-              className="rounded-full px-4 text-sm font-medium transition-all hover:scale-105"
-            >
-              Delete All
-            </Button>
-          </AlertDialogTrigger>
-          <AlertDialogContent className="rounded-xl">
-            <AlertDialogHeader>
-              <AlertDialogTitle className="text-lg">Are you sure?</AlertDialogTitle>
-              <AlertDialogDescription className="text-sm text-muted-foreground">
-                This will permanently delete your watched history.
-              </AlertDialogDescription>
-            </AlertDialogHeader>
-            <AlertDialogFooter>
-              <AlertDialogCancel className="text-sm">Cancel</AlertDialogCancel>
-              <AlertDialogAction
-                onClick={handleDeleteAllEpisode}
-                className="bg-gradient-to-r from-red-500 to-pink-500 text-white hover:from-red-600 hover:to-pink-600"
-              >
-                Continue
-              </AlertDialogAction>
-            </AlertDialogFooter>
-          </AlertDialogContent>
-        </AlertDialog>
-      </div>
-
-      {/* Scrollable Anime Cards */}
-      <ScrollArea className="w-full whitespace-nowrap">
-        <div className="flex space-x-4 pb-2">
+      {/* Scrollable Cards */}
+      <ScrollArea className="w-full pb-2">
+        <div className="flex space-x-5">
           {lastWatched.map((episode: any, index: number) => (
             <Link
               href={episode.episode}
               key={episode.router}
-              className={`group block transform rounded-xl border border-border/40 bg-card/60 shadow-sm backdrop-blur-sm transition-all duration-500 hover:scale-105 hover:shadow-xl dark:border-gray-800 ${
-                isVisible ? "translate-y-0 opacity-100" : "translate-y-6 opacity-0"
+              className={`group block w-48 transform rounded-xl border border-border/40 bg-card/60 shadow-sm backdrop-blur-sm transition-all duration-500 hover:scale-105 hover:shadow-xl dark:border-gray-800 ${
+                isVisible ? "translate-y-0 opacity-100" : "translate-y-8 opacity-0"
               }`}
               style={{ transitionDelay: `${index * 70}ms` }}
             >
               {/* Poster */}
-              <div className="relative aspect-[2/3] w-48 overflow-hidden rounded-t-xl sm:w-52 md:w-56">
+              <div className="relative aspect-[2/3] overflow-hidden rounded-t-xl">
                 <Image
                   src={episode.poster}
                   alt={episode.title}
@@ -135,6 +104,37 @@ export default function LastWatched() {
         </div>
         <ScrollBar orientation="horizontal" className="h-1" />
       </ScrollArea>
+
+      {/* Delete All Button */}
+      <div className="mt-6 flex justify-center">
+        <AlertDialog>
+          <AlertDialogTrigger asChild>
+            <Button
+              variant="destructive"
+              className="rounded-full bg-gradient-to-r from-red-500 to-pink-500 px-6 text-sm font-medium text-white hover:from-red-600 hover:to-pink-600"
+            >
+              {"Delete All"}
+            </Button>
+          </AlertDialogTrigger>
+          <AlertDialogContent className="rounded-xl">
+            <AlertDialogHeader>
+              <AlertDialogTitle className="text-lg">{"Are you sure?"}</AlertDialogTitle>
+              <AlertDialogDescription className="text-sm text-muted-foreground">
+                {"This will permanently delete your watched history."}
+              </AlertDialogDescription>
+            </AlertDialogHeader>
+            <AlertDialogFooter>
+              <AlertDialogCancel className="text-sm">{"Cancel"}</AlertDialogCancel>
+              <AlertDialogAction
+                onClick={handleDeleteAllEpisode}
+                className="bg-gradient-to-r from-red-500 to-pink-500 text-white hover:from-red-600 hover:to-pink-600"
+              >
+                {"Continue"}
+              </AlertDialogAction>
+            </AlertDialogFooter>
+          </AlertDialogContent>
+        </AlertDialog>
+      </div>
     </section>
   );
 }
