@@ -118,19 +118,16 @@ export default function LastWatched() {
           </AlertDialogTrigger>
           <AlertDialogContent className="rounded-xl">
             <AlertDialogHeader>
-              <AlertDialogTitle className="text-lg">{"Are you sure?"}</AlertDialogTitle>
-              <AlertDialogDescription className="text-sm text-muted-foreground">
-                {"This will permanently delete your watched history."}
-              </AlertDialogDescription>
-            </AlertDialogHeader>
-            <AlertDialogFooter>
-              <AlertDialogCancel className="text-sm">{"Cancel"}</AlertDialogCancel>
-              <AlertDialogAction
-                onClick={handleDeleteAllEpisode}
-                className="bg-gradient-to-r from-red-500 to-pink-500 text-white hover:from-red-600 hover:to-pink-600"
-              >
-                {"Continue"}
-              </AlertDialogAction>
+                  <AlertDialogTitle>Are you sure?</AlertDialogTitle>
+                  <AlertDialogDescription>
+                    This will delete all episodes you have watched.
+                  </AlertDialogDescription>
+                </AlertDialogHeader>
+                <AlertDialogFooter>
+                  <AlertDialogCancel>Cancel</AlertDialogCancel>
+                  <AlertDialogAction onClick={handleDeleteAllEpisode}>
+                    Continue
+                  </AlertDialogAction>
             </AlertDialogFooter>
           </AlertDialogContent>
         </AlertDialog>
