@@ -5,7 +5,7 @@ import { Metadata } from "next/types";
 
 export const metadata: Metadata = {
   title: "Home | Otakudesu",
-  description: "Home Page Otakudesu. Build by Rizky Haksono",
+  description: "Home Page Otakudesu. Build by Raihan_official0307",
 };
 
 export default function Home() {
