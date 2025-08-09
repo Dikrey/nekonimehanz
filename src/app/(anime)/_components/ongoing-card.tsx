@@ -17,77 +17,63 @@ export default function OngoingCard({
 }>) {
   if (!animeData) {
     return (
-      <div className="mx-auto max-w-4xl rounded-2xl bg-gray-900/80 p-1 shadow-2xl">
-        <div className="rounded-2xl bg-gray-950/90 p-5 backdrop-blur-sm">
-          <CardHeader className="text-center text-xl font-bold text-white">
-            {animeHeader}
-          </CardHeader>
-          <SkeletonCard />
-        </div>
-      </div>
+      <>
+        <CardHeader className="text-center font-bold text-3xl tracking-wide">
+          {animeHeader}
+        </CardHeader>
+        <SkeletonCard />
+      </>
     );
   }
 
   return (
-    <div className="mx-auto max-w-4xl rounded-2xl bg-gray-900/60 p-1 shadow-xl">
-      {/* Inner Card */}
-      <div className="rounded-2xl bg-gray-950/90 p-5 backdrop-blur-sm">
-        {/* Header */}
-        <CardHeader className="text-center text-xl font-bold text-transparent bg-gradient-to-r from-purple-400 to-pink-500 bg-clip-text sm:text-2xl">
-          {animeHeader}
-        </CardHeader>
+    <>
+      <CardHeader className="text-center font-extrabold text-3xl tracking-wide text-primary">
+        {animeHeader}
+      </CardHeader>
 
-        {/* Grid 2 Kolom di Mobile, 5 di Desktop */}
-        <div className="grid gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5">
-          {animeData.map((anime: OnGoingAnimeProps) => (
-            <Link href={`/anime/${anime.slug}`} key={anime.slug}>
-              <Card className="group relative flex h-full flex-col overflow-hidden rounded-xl border border-border/30 bg-gray-900/70 transition-all duration-500 hover:scale-105 hover:shadow-lg hover:shadow-purple-500/10">
-                {/* Poster */}
-                <div className="relative aspect-[2/3] overflow-hidden">
-                  <Image
-                    src={anime.poster}
-                    alt={anime.title}
-                    fill
-                    className="object-cover transition-transform duration-700 group-hover:scale-110"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent" />
-                  {anime.current_episode && (
-                    <div className="absolute left-1 top-1 rounded-full bg-gradient-to-r from-purple-600 to-pink-600 px-1.5 py-0.5 text-xs font-bold text-white">
-                      EP {anime.current_episode}
-                    </div>
-                  )}
-                </div>
-
-                {/* Info */}
-                <div className="flex-1 space-y-1 p-3 text-white">
-                  <Typography.P className="line-clamp-2 text-xs font-bold text-white group-hover:text-purple-300 sm:text-sm">
+      <div className="mx-2 grid gap-5 max-[640px]:grid-cols-2 sm:grid-cols-3 md:grid-cols-3 lg:grid-cols-5 xl:grid-cols-5">
+        {animeData?.map((anime: OnGoingAnimeProps) => (
+          <Link href={`/anime/${anime.slug}`} key={anime.slug}>
+            <Card className="group relative overflow-hidden rounded-xl bg-gradient-to-b from-card/40 to-card/80 border border-border backdrop-blur-lg shadow-md hover:shadow-xl transition-all duration-500 h-full">
+              {/* Image */}
+              <div className="relative overflow-hidden">
+                <Image
+                  src={anime.poster}
+                  alt={anime.title}
+                  className="object-cover w-full h-48 sm:h-72 md:h-72 lg:h-72 xl:h-96 rounded-t-xl transition-transform duration-500 group-hover:scale-110"
+                  width={1000}
+                  height={1000}
+                />
+                {/* Overlay info saat hover */}
+                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex flex-col justify-end p-4">
+                  <Typography.P className="text-lg font-bold text-white line-clamp-2">
                     {anime.title}
                   </Typography.P>
-                  <Typography.P className="text-[10px] text-purple-200 sm:text-xs">
-                    📅 {anime.current_episode} eps
+                  <Typography.P className="text-sm text-gray-200">
+                    {anime.current_episode} Episodes
                   </Typography.P>
-                  <Typography.P className="text-[10px] text-gray-400 sm:text-xs">
-                    🗓️ {anime.release_day || "Unknown"}
+                  <Typography.P className="text-sm text-gray-300">
+                    📅 {anime.release_day} — {anime.newest_release_date}
                   </Typography.P>
                 </div>
-              </Card>
-            </Link>
-          ))}
-        </div>
-
-        {/* See All Button */}
-        {seeAllLink && (
-          <CardFooter className="mt-6 flex justify-center">
-            <Button
-              asChild
-              variant="outline"
-              className="rounded-full border-purple-500/50 bg-purple-500/10 px-5 py-1 text-xs font-medium text-purple-300 backdrop-blur-sm hover:scale-105 hover:border-purple-400 hover:bg-purple-500/20 hover:text-purple-100 sm:px-6 sm:py-2 sm:text-sm"
-            >
-              <Link href={`/${seeAllLink}/1`}>See All →</Link>
-            </Button>
-          </CardFooter>
-        )}
+              </div>
+            </Card>
+          </Link>
+        ))}
       </div>
-    </div>
+
+      {seeAllLink && (
+        <CardFooter className="mt-6 flex justify-center">
+          <Link href={`/${seeAllLink}/1`}>
+            <Button
+              className="rounded-full px-6 py-2 bg-gradient-to-r from-purple-500 via-pink-500 to-red-500 text-white font-semibold shadow-lg hover:shadow-xl hover:scale-105 transition-all"
+            >
+              See all →
+            </Button>
+          </Link>
+        </CardFooter>
+      )}
+    </>
   );
 }
