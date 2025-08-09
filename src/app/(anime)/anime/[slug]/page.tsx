@@ -19,11 +19,11 @@ export default function AnimeSlugPage() {
   const [isVisible, setIsVisible] = useState(false);
 
   const {
-     dataAnime,
-    error: errorAnime,
-    isLoading: loadingAnime,
-  } = useGetAnimeQuery(router.slug);
-
+  data: dataAnime,
+  error: errorAnime,
+  isLoading: loadingAnime,
+} = useGetAnimeQuery(router.slug);
+  
   useEffect(() => {
     setIsVisible(true);
   }, []);
