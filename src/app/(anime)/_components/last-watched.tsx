@@ -1,7 +1,7 @@
 "use client";
 
 import { getSavedEpisode, deleteAllEpisode } from "@/helpers/storage-episode";
-import { Card, CardHeader } from "@/components/ui/card";
+import { Card, CardHeader, CardContent } from "@/components/ui/card";
 import Image from "next/image";
 import Link from "next/link";
 import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area";
@@ -30,93 +30,96 @@ export default function LastWatched() {
       new Promise<void>((resolve) => {
         deleteAllEpisode();
         resolve();
-      }), {
-      loading: "Deleting...",
-      success: "Episodes have been deleted",
-      error: "Failed to delete episodes",
-      finally: () => router.refresh(),
-    })
+      }),
+      {
+        loading: "Deleting...",
+        success: "Episodes have been deleted",
+        error: "Failed to delete episodes",
+        finally: () => router.refresh(),
+      }
+    );
   };
 
   return (
-    <Card className="border-none shadow-lg bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
-      <CardHeader className="flex flex-row items-center justify-between px-6 py-4 space-y-0">
-        <Typography.H4 className="font-bold">Continue Watching</Typography.H4>
-        {lastWatched.length > 0 && (
-          <AlertDialog>
-            <AlertDialogTrigger asChild>
-              <Button 
-                variant="ghost" 
-                size="sm"
-                className="text-destructive hover:text-destructive/80 hover:bg-destructive/10"
-              >
-                Clear All
-              </Button>
-            </AlertDialogTrigger>
-            <AlertDialogContent>
-              <AlertDialogHeader>
-                <AlertDialogTitle>Are you sure?</AlertDialogTitle>
-                <AlertDialogDescription>
-                  This will remove all your watched episodes from history.
-                </AlertDialogDescription>
-              </AlertDialogHeader>
-              <AlertDialogFooter>
-                <AlertDialogCancel>Cancel</AlertDialogCancel>
-                <AlertDialogAction 
-                  onClick={handleDeleteAllEpisode}
-                  className="bg-destructive hover:bg-destructive/90"
-                >
-                  Clear History
-                </AlertDialogAction>
-              </AlertDialogFooter>
-            </AlertDialogContent>
-          </AlertDialog>
-        )}
+    <Card className="border-none shadow-lg rounded-2xl bg-background">
+      <CardHeader className="text-center text-2xl font-bold pb-2">
+        🎬 Last Watched
       </CardHeader>
-      
-      <ScrollArea className="w-full pb-4">
-        <div className={`${lastWatched.length > 0 ? "flex space-x-4 px-4" : "py-8 text-center"}`}>
-          {lastWatched.length > 0 ? (
-            lastWatched.map((episode: any) => (
-              <Card
-                key={episode.router}
-                className="group relative overflow-hidden rounded-lg transition-all duration-300 hover:shadow-xl hover:-translate-y-1"
-              >
-                <div className="relative">
+
+      <CardContent>
+        <ScrollArea className="w-full whitespace-nowrap pb-4">
+          <div
+            className={`${
+              lastWatched.length > 0
+                ? "flex gap-4 px-2"
+                : "py-6 text-center w-full"
+            }`}
+          >
+            {lastWatched.length > 0 ? (
+              lastWatched.map((episode: any) => (
+                <Card
+                  key={episode.router}
+                  className="overflow-hidden rounded-xl shadow-sm hover:shadow-md transition-all duration-300 bg-card border hover:border-primary"
+                >
                   <Link href={episode.episode}>
-                    <Image
-                      src={episode.poster}
-                      className="rounded-t-lg object-cover aspect-[2/3] max-[640px]:h-40 sm:h-80 md:h-72 lg:h-72 xl:h-96 w-full"
-                      width={200}
-                      height={300}
-                      loading="lazy"
-                      alt={episode.title}
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                    <div className="relative w-full">
+                      <Image
+                        src={episode.poster}
+                        alt="Poster Last Watched"
+                        width={250}
+                        height={350}
+                        loading="lazy"
+                        className="rounded-t-xl object-cover h-60 w-full sm:h-72 md:h-80"
+                      />
+                    </div>
                   </Link>
-                </div>
-                <div className="p-3">
-                  <Typography.P className="font-medium line-clamp-2 text-center group-hover:text-primary transition-colors">
-                    {episode.title}
-                  </Typography.P>
-                </div>
-              </Card>
-            ))
-          ) : (
-            <div className="w-full flex flex-col items-center justify-center space-y-4">
+                  <ScrollArea className="px-3 py-2 w-60">
+                    <Typography.P className="text-center font-medium">
+                      {episode.title}
+                    </Typography.P>
+                    <ScrollBar orientation="horizontal" />
+                  </ScrollArea>
+                </Card>
+              ))
+            ) : (
               <Typography.P className="text-muted-foreground">
-                No watched episodes yet
+                No episode watched yet
               </Typography.P>
-              <Button variant="outline" asChild>
-                <Link href="/">
-                  Start Watching
-                </Link>
-              </Button>
-            </div>
-          )}
-        </div>
-        <ScrollBar orientation="horizontal" />
-      </ScrollArea>
+            )}
+          </div>
+          <ScrollBar orientation="horizontal" />
+        </ScrollArea>
+
+        {lastWatched.length > 0 && (
+          <div className="mt-4 flex justify-center">
+            <AlertDialog>
+              <AlertDialogTrigger asChild>
+                <Button
+                  variant="destructive"
+                  className="rounded-full px-6 shadow hover:shadow-lg transition-all"
+                >
+                  🗑 Delete All
+                </Button>
+              </AlertDialogTrigger>
+              <AlertDialogContent>
+                <AlertDialogHeader>
+                  <AlertDialogTitle>Are you sure?</AlertDialogTitle>
+                  <AlertDialogDescription>
+                    This will delete all episodes you have watched. This action
+                    cannot be undone.
+                  </AlertDialogDescription>
+                </AlertDialogHeader>
+                <AlertDialogFooter>
+                  <AlertDialogCancel>Cancel</AlertDialogCancel>
+                  <AlertDialogAction onClick={handleDeleteAllEpisode}>
+                    Continue
+                  </AlertDialogAction>
+                </AlertDialogFooter>
+              </AlertDialogContent>
+            </AlertDialog>
+          </div>
+        )}
+      </CardContent>
     </Card>
   );
 }
