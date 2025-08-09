@@ -1,142 +1,105 @@
-"use client";
-
-import { getSavedEpisode, deleteAllEpisode } from "@/helpers/storage-episode";
-import { Card } from "@/components/ui/card";
+import { OnGoingAnimeProps } from "@/types/ongoing-anime";
+import { Card, CardFooter, CardHeader } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
 import Image from "next/image";
 import Link from "next/link";
-import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area";
-import { Button } from "@/components/ui/button";
-import { toast } from "sonner";
-import {
-  AlertDialog,
-  AlertDialogAction,
-  AlertDialogCancel,
-  AlertDialogContent,
-  AlertDialogDescription,
-  AlertDialogFooter,
-  AlertDialogHeader,
-  AlertDialogTitle,
-  AlertDialogTrigger,
-} from "@/components/ui/alert-dialog";
-import { useRouter } from "next/navigation";
+import SkeletonCard from "@/components/layout/skeleton-card";
 import Typography from "@/components/ui/typography";
-import { useEffect, useState } from "react";
 
-export default function LastWatched() {
-  const lastWatched = getSavedEpisode();
-  const router = useRouter();
-  const [isVisible, setIsVisible] = useState(false);
-
-  useEffect(() => {
-    setIsVisible(true);
-  }, []);
-
-  const handleDeleteAllEpisode = () => {
-    toast.promise(
-      new Promise<void>((resolve) => {
-        deleteAllEpisode();
-        resolve();
-      }),
-      {
-        loading: "Deleting watched history...",
-        success: "All episodes cleared!",
-        error: "Failed to delete history",
-        finally: () => router.refresh(),
-      }
-    );
-  };
-
-  if (lastWatched.length === 0) {
+export default function OngoingCard({
+  animeHeader,
+  animeData,
+  seeAllLink,
+}: Readonly<{
+  animeData: OnGoingAnimeProps[];
+  seeAllLink: string | null | undefined;
+  animeHeader: string | null | undefined;
+}>) {
+  if (!animeData) {
     return (
-      <div className="container mx-auto px-4 py-6 text-center">
-        <Card className="mx-auto max-w-md rounded-xl border border-dashed border-border/50 bg-muted/30 p-8 shadow-sm">
-          <Typography.P className="text-base text-muted-foreground">
-            🎬 You haven't watched any anime yet.
-          </Typography.P>
-          <Typography.P className="mt-1 text-sm text-muted-foreground/80">
-            Your recently watched episodes will appear here.
-          </Typography.P>
-        </Card>
-      </div>
+      <>
+        <CardHeader className="text-center font-bold text-2xl text-white drop-shadow-md">
+          {animeHeader}
+        </CardHeader>
+        <SkeletonCard />
+      </>
     );
   }
 
   return (
-    <section className="container mx-auto px-4 py-6">
-      {/* Header */}
-      <Typography.H3 className="mb-6 bg-gradient-to-r from-purple-500 to-pink-500 bg-clip-text text-center text-2xl font-bold text-transparent">
-        🎯 Last Watched
-      </Typography.H3>
+    <>
+      {/* Header dengan sedikit glow */}
+      <CardHeader className="text-center font-bold text-2xl text-white drop-shadow-sm mb-1">
+        {animeHeader}
+      </CardHeader>
 
-      {/* Scrollable Cards - Container tidak terlalu lebar */}
-      <div className="mx-auto max-w-5xl">
-        <ScrollArea className="inline-block w-full whitespace-nowrap pb-2">
-          <div className="flex space-x-5">
-            {lastWatched.map((episode: any, index: number) => (
-              <Link
-                href={episode.episode}
-                key={episode.router}
-                className={`group block w-48 transform rounded-xl border border-border/40 bg-card/60 shadow-sm backdrop-blur-sm transition-all duration-500 hover:scale-105 hover:shadow-xl dark:border-gray-800 ${
-                  isVisible ? "translate-y-0 opacity-100" : "translate-y-8 opacity-0"
-                }`}
-                style={{ transitionDelay: `${index * 70}ms` }}
-              >
-                {/* Poster */}
-                <div className="relative aspect-[2/3] overflow-hidden rounded-t-xl">
-                  <Image
-                    src={episode.poster}
-                    alt={episode.title}
-                    fill
-                    className="object-cover transition-transform duration-700 group-hover:scale-110"
-                    loading="lazy"
-                  />
-                  {/* Gradient Overlay */}
-                  <div className="absolute inset-x-0 bottom-0 h-1/3 bg-gradient-to-t from-black/60 via-transparent to-transparent"></div>
-                </div>
+      {/* Grid Cards */}
+      <div className="mx-2 grid gap-5 max-[640px]:grid-cols-2 sm:grid-cols-3 md:grid-cols-3 lg:grid-cols-5 xl:grid-cols-5">
+        {animeData?.map((anime: OnGoingAnimeProps) => (
+          <Link href={`/anime/${anime.slug}`} key={anime.slug}>
+            <Card className="group relative flex flex-col rounded-xl overflow-hidden border border-transparent bg-gradient-to-b from-background to-muted/60 shadow-sm hover:shadow-xl transition-all duration-500 hover:border-primary/30 hover:shadow-primary/10 h-full transform-gpu">
+              {/* Image Wrapper dengan Aspect Ratio dan Glow */}
+              <div className="relative aspect-[3/4] overflow-hidden">
+                <Image
+                  src={anime.poster}
+                  alt={anime.title}
+                  fill
+                  sizes="(max-width: 640px) 50vw, (max-width: 768px) 33vw, (max-width: 1024px) 20vw, 16vw"
+                  className="object-cover transition-transform duration-700 group-hover:scale-110"
+                />
 
-                {/* Title */}
-                <div className="p-3 text-center">
-                  <Typography.P className="line-clamp-2 text-sm font-medium text-foreground group-hover:text-purple-600 dark:group-hover:text-purple-400">
-                    {episode.title}
+                {/* Gradient Overlay */}
+                <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent opacity-80 group-hover:opacity-70" />
+
+                {/* Badge - New Episode Indicator */}
+                {anime.current_episode && (
+                  <div className="absolute top-2 right-2 rounded-full bg-primary/90 px-2 py-0.5 text-[10px] font-bold text-primary-foreground shadow-md scale-90 opacity-0 group-hover:opacity-100 group-hover:scale-100 transition-all duration-300">
+                    EP {anime.current_episode}
+                  </div>
+                )}
+              </div>
+
+              {/* Content */}
+              <div className="flex-1 p-3 space-y-1.5 bg-transparent">
+                {/* Judul */}
+                <Typography.P className="font-bold text-white text-sm line-clamp-2 group-hover:text-primary-foreground transition-colors duration-300 drop-shadow-md">
+                  {anime.title}
+                </Typography.P>
+
+                {/* Info */}
+                <div className="space-y-0.5 text-xs">
+                  <Typography.P className="text-primary/90 underline underline-offset-2 decoration-1">
+                    {anime.current_episode} episodes
+                  </Typography.P>
+                  <Typography.P className="text-muted-foreground/90">
+                    <span className="text-white/80 font-medium">Day:</span> {anime.release_day}
+                  </Typography.P>
+                  <Typography.P className="text-muted-foreground/90">
+                    <span className="text-white/80 font-medium">Date:</span> {anime.newest_release_date}
                   </Typography.P>
                 </div>
-              </Link>
-            ))}
-          </div>
-          <ScrollBar orientation="horizontal" className="h-1" />
-        </ScrollArea>
+              </div>
+
+              {/* Glow Effect saat hover */}
+              <div className="pointer-events-none absolute inset-0 -z-10 rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+                <div className="absolute inset-0 rounded-xl bg-gradient-to-tr from-transparent via-primary/10 to-transparent blur-md" />
+              </div>
+            </Card>
+          </Link>
+        ))}
       </div>
 
-      {/* Delete All Button */}
-      <div className="mt-6 flex justify-center">
-        <AlertDialog>
-          <AlertDialogTrigger asChild>
-            <Button
-              variant="destructive"
-              className="rounded-full bg-gradient-to-r from-red-500 to-pink-500 px-6 text-sm font-medium text-white hover:from-red-600 hover:to-pink-600"
-            >
-              {"Delete All"}
-            </Button>
-          </AlertDialogTrigger>
-          <AlertDialogContent className="rounded-xl">
-            <AlertDialogHeader>
-              <AlertDialogTitle className="text-lg">{"Are you sure?"}</AlertDialogTitle>
-              <AlertDialogDescription className="text-sm text-muted-foreground">
-                {"This will permanently delete your watched history."}
-              </AlertDialogDescription>
-            </AlertDialogHeader>
-            <AlertDialogFooter>
-              <AlertDialogCancel className="text-sm">{"Cancel"}</AlertDialogCancel>
-              <AlertDialogAction
-                onClick={handleDeleteAllEpisode}
-                className="bg-gradient-to-r from-red-500 to-pink-500 text-white hover:from-red-600 hover:to-pink-600"
-              >
-                {"Continue"}
-              </AlertDialogAction>
-            </AlertDialogFooter>
-          </AlertDialogContent>
-        </AlertDialog>
-      </div>
-    </section>
+      {/* See All Button - Modern Pill Style */}
+      {seeAllLink && (
+        <CardFooter className="mt-6 flex justify-end">
+          <Button
+            variant="outline"
+            className="rounded-full px-6 py-2 text-sm font-semibold bg-background/80 backdrop-blur-sm border-primary/40 text-primary hover:bg-primary hover:text-primary-foreground transition-all duration-300 transform hover:scale-105 hover:shadow-lg"
+          >
+            <Link href={`/${seeAllLink}/1`}>See all →</Link>
+          </Button>
+        </CardFooter>
+      )}
+    </>
   );
 }
