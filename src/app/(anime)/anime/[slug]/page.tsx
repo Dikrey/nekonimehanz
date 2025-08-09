@@ -44,7 +44,7 @@ export default function AnimeSlugPage() {
     );
   }
 
-  if (!dataAnime || !dataAnime.data) return notFound();
+    if (dataAnime?.data === undefined) return notFound();
 
   const anime = dataAnime.data;
 
