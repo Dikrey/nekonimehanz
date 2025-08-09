@@ -6,21 +6,21 @@ export default function Footer() {
       <p className="text-balance text-center text-sm leading-loose text-muted-foreground md:text-left">
         Built by&nbsp;
         <Link
-          href="https://github.com/rizkyhaksono"
+          href="https://linktr.ee/RaihanDIkrey"
           target="_blank"
           rel="noreferrer"
           className="font-medium text-foreground underline underline-offset-4"
         >
-          rizkyhaksono
+          Raihan_official0307
         </Link>
-        .&nbsp;The source code is available on&nbsp;
+        .&nbsp;Follow my Instagram &nbsp;
         <Link
-          href="https://github.com/rizkyhaksono/otakudesu-fe"
+          href="https://instagram.com/muhammad_raihan0307"
           target="_blank"
           rel="noreferrer"
           className="font-medium text-foreground underline underline-offset-4"
         >
-          GitHub
+          Instagram
         </Link>
       </p>
     </footer>
