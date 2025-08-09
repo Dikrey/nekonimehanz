@@ -3,7 +3,7 @@ import { Metadata } from "next/types";
 
 export const metadata: Metadata = {
   title: "On Going Anime | Otakudesu",
-  description: "Ongoing Anime Page Otakudesu. Build by Rizky Haksono",
+  description: "Ongoing Anime Page Otakudesu. Build by Raihan_official0307",
 };
 
 export default function OngoingAnimeLayout({
