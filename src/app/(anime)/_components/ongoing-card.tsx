@@ -49,7 +49,7 @@ export default function OngoingCard({
                     src={anime.poster}
                     alt={anime.title}
                     fill
-                    sizes="(max-width: 640px) 50vw, (max-width: 768px) 33vw, (max-width: 1024px) 20vw, 16vw"
+                    sizes="(max-width: 440px) 50vw, (max-width: 508px) 33vw, (max-width: 1000px) 20vw, 16vw"
                     className="object-cover transition-transform duration-700 group-hover:scale-110"
                   />
                   {/* Gradient Overlay */}
