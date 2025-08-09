@@ -82,7 +82,7 @@ export default function Navbar() {
                           href="/"
                         >
                           <FaCat className="size-6" />
-                          <div className="mb-2 mt-4 text-lg font-medium">Otakudesu Natee</div>
+                          <div className="mb-2 mt-4 text-lg font-medium">Anime Neko Hanz</div>
                           <p className="text-sm leading-tight text-muted-foreground">
                             The best place to watch anime online.
                           </p>
@@ -163,10 +163,7 @@ export default function Navbar() {
               <FaBolt />
             </Link>
           </div>
-          <div className="flex items-center max-[640px]:justify-end sm:justify-end space-x-2">
-            <Link target="_blank" rel="noreferrer" href="https://github.com/rizkyhaksono/otakudesu-fe">
-              <FaGithub />
-            </Link>
+        
             <Button onClick={toggleTheme} variant="ghost">
               {theme === "light" ? <IoSunny /> : <FiMoon />}
             </Button>
