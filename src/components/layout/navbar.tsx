@@ -163,7 +163,10 @@ export default function Navbar() {
               <FaBolt />
             </Link>
           </div>
-        
+          <div className="flex items-center max-[640px]:justify-end sm:justify-end space-x-2">
+            <Link target="_blank" rel="noreferrer" href="https://instagram.com/muhammad_raihan0307">
+              <FaGithub />
+            </Link>
             <Button onClick={toggleTheme} variant="ghost">
               {theme === "light" ? <IoSunny /> : <FiMoon />}
             </Button>
