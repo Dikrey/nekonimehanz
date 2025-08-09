@@ -1,0 +1,36 @@
+.rgb-border {
+  position: relative;
+  border-radius: 0.75rem;
+}
+
+.rgb-border::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  padding: 2px;
+  border-radius: inherit;
+  background: linear-gradient(
+    90deg,
+    red,
+    orange,
+    yellow,
+    lime,
+    cyan,
+    blue,
+    violet,
+    red
+  );
+  background-size: 400%;
+  animation: rgbMove 6s linear infinite;
+  -webkit-mask: 
+    linear-gradient(#000 0 0) content-box,
+    linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+          mask-composite: exclude;
+  z-index: 1;
+}
+
+@keyframes rgbMove {
+  0% { background-position: 0% 50%; }
+  100% { background-position: 100% 50%; }
+}
