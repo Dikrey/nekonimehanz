@@ -58,9 +58,12 @@ export default function SchedulesPage() {
             isVisible ? "translate-y-0 opacity-100" : "translate-y-4 opacity-0"
           }`}
         >
-          <h2 className="mb-6 bg-gradient-to-r from-purple-500 to-pink-500 bg-clip-text text-3xl font-extrabold leading-tight text-transparent sm:text-4xl md:text-5xl">
-            Sync Up with <span className="bg-clip-text from-blue-400 to-purple-500 bg-clip-text text-transparent">Anime</span>
-          </h2>
+         <h2 className="mb-6 font-sans text-3xl font-bold tracking-tight text-foreground sm:text-4xl">
+  Sync Up with
+  <span className="bg-gradient-to-r from-orange-400 via-orange-500 to-pink-500 bg-clip-text text-transparent font-bold">
+    &nbsp;Anime
+  </span>
+</h2>
           <p className="text-base text-muted-foreground md:text-lg">
             Stay ahead of release times and never miss a new episode. Catch every anime on schedule!
           </p>
