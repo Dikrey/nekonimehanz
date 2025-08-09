@@ -3,7 +3,7 @@ import BaseLayout from "./base-layout";
 
 export const metadata: Metadata = {
   title: "Error Segment | Otakudesu",
-  description: "Otakudesu Page. Build by Rizky Haksono",
+  description: "Otakudesu Page. Build by Raihan_official0307",
 };
 
 export default function ErrorSegment() {
