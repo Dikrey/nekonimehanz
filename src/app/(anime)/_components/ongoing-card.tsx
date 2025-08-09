@@ -17,11 +17,9 @@ export default function OngoingCard({
 }>) {
   if (!animeData) {
     return (
-      <div className="relative rounded-2xl bg-background p-1">
-        {/* Outer Shadow Wrapper */}
-        <div className="absolute inset-0 rounded-2xl bg-gradient-to-r from-transparent via-primary/10 to-transparent opacity-0 group-hover:opacity-80 blur-md transition-opacity duration-500 -z-10"></div>
-        <div className="relative rounded-2xl bg-background p-6 shadow-lg shadow-primary/5 border border-border/50">
-          <CardHeader className="text-center font-bold text-2xl text-white drop-shadow-sm">
+      <div className="relative mx-auto max-w-6xl overflow-hidden rounded-2xl bg-gradient-to-br from-gray-900/70 to-black/80 p-1 shadow-2xl">
+        <div className="relative rounded-2xl bg-gray-950/90 p-6 backdrop-blur-sm">
+          <CardHeader className="text-center text-2xl font-extrabold text-white drop-shadow-lg">
             {animeHeader}
           </CardHeader>
           <SkeletonCard />
@@ -31,25 +29,22 @@ export default function OngoingCard({
   }
 
   return (
-    // 🌟 WRAPPER UTAMA DENGAN SHADOW & GLOW
-    <div className="relative rounded-2xl bg-background p-1.5">
-      {/* Glow Background (Optional - bisa dihapus jika terlalu mencolok) */}
-      <div className="absolute inset-0 rounded-2xl bg-gradient-to-r from-primary/5 via-transparent to-primary/5 blur-md opacity-0 group-hover:opacity-40 transition-opacity duration-700 -z-10"></div>
-      
-      {/* Inner Container - Floating Card */}
-      <div className="relative rounded-2xl bg-background p-5 shadow-xl shadow-black/10 border border-border/40 backdrop-blur-sm">
+    // 🌟 WRAPPER UTAMA: Card dengan Glow & Shadow
+    <div className="relative mx-auto max-w-6xl overflow-hidden rounded-2xl bg-gradient-to-br from-purple-950/20 via-gray-900/50 to-black/60 p-1 shadow-2xl shadow-purple-500/10">
+      {/* Inner Container */}
+      <div className="relative rounded-2xl bg-gray-950/90 p-6 backdrop-blur-sm">
         {/* Header */}
-        <CardHeader className="text-center font-bold text-2xl text-white drop-shadow-sm mb-2">
+        <CardHeader className="text-center text-2xl font-extrabold text-transparent drop-shadow-sm bg-gradient-to-r from-purple-400 via-pink-500 to-red-500 bg-clip-text">
           {animeHeader}
         </CardHeader>
 
         {/* Grid Cards */}
-        <div className="mx-2 grid gap-5 max-[640px]:grid-cols-2 sm:grid-cols-3 md:grid-cols-3 lg:grid-cols-5 xl:grid-cols-5">
+        <div className="grid gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5">
           {animeData?.map((anime: OnGoingAnimeProps) => (
             <Link href={`/anime/${anime.slug}`} key={anime.slug}>
-              <Card className="group relative flex flex-col rounded-xl overflow-hidden border border-transparent bg-gradient-to-b from-background to-muted/60 shadow-sm hover:shadow-xl transition-all duration-500 hover:border-primary/30 hover:shadow-primary/10 h-full transform-gpu">
+              <Card className="group relative flex h-full flex-col overflow-hidden rounded-xl border border-border/40 bg-gradient-to-b from-gray-900/60 to-gray-800/40 shadow-sm transition-all duration-500 hover:scale-105 hover:shadow-2xl hover:shadow-purple-500/20 dark:border-gray-700">
                 {/* Image Wrapper */}
-                <div className="relative aspect-[3/4] overflow-hidden">
+                <div className="relative aspect-[2/3] overflow-hidden">
                   <Image
                     src={anime.poster}
                     alt={anime.title}
@@ -57,37 +52,37 @@ export default function OngoingCard({
                     sizes="(max-width: 640px) 50vw, (max-width: 768px) 33vw, (max-width: 1024px) 20vw, 16vw"
                     className="object-cover transition-transform duration-700 group-hover:scale-110"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent opacity-80 group-hover:opacity-70" />
-                  
-                  {/* Badge */}
+                  {/* Gradient Overlay */}
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent" />
+                  {/* Badge: Episode */}
                   {anime.current_episode && (
-                    <div className="absolute top-2 right-2 rounded-full bg-primary/90 px-2 py-0.5 text-[10px] font-bold text-primary-foreground shadow-md scale-90 opacity-0 group-hover:opacity-100 group-hover:scale-100 transition-all duration-300">
+                    <div className="absolute left-2 top-2 rounded-full bg-gradient-to-r from-purple-600 to-pink-600 px-2 py-1 text-xs font-bold text-white shadow-lg transition-all duration-300 group-hover:scale-110">
                       EP {anime.current_episode}
                     </div>
                   )}
                 </div>
 
                 {/* Content */}
-                <div className="flex-1 p-3 space-y-1.5 bg-transparent">
-                  <Typography.P className="font-bold text-white text-sm line-clamp-2 group-hover:text-primary-foreground transition-colors duration-300 drop-shadow-md">
+                <div className="flex-1 space-y-1.5 p-4 text-white">
+                  <Typography.P className="line-clamp-2 text-sm font-bold text-white group-hover:text-purple-300">
                     {anime.title}
                   </Typography.P>
-                  <div className="space-y-0.5 text-xs">
-                    <Typography.P className="text-primary/90 underline underline-offset-2 decoration-1">
-                      {anime.current_episode} episodes
+                  <div className="space-y-1 text-xs text-gray-300">
+                    <Typography.P className="text-purple-200">
+                      📅 {anime.current_episode} episodes
                     </Typography.P>
-                    <Typography.P className="text-muted-foreground/90">
-                      <span className="text-white/80 font-medium">Day:</span> {anime.release_day}
+                    <Typography.P>
+                      🗓️ <span className="text-gray-400">Day:</span> {anime.release_day || "Unknown"}
                     </Typography.P>
-                    <Typography.P className="text-muted-foreground/90">
-                      <span className="text-white/80 font-medium">Date:</span> {anime.newest_release_date}
+                    <Typography.P>
+                      🕒 <span className="text-gray-400">Date:</span> {anime.newest_release_date || "–"}
                     </Typography.P>
                   </div>
                 </div>
 
                 {/* Glow Effect saat hover */}
-                <div className="pointer-events-none absolute inset-0 -z-10 rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500">
-                  <div className="absolute inset-0 rounded-xl bg-gradient-to-tr from-transparent via-primary/10 to-transparent blur-md" />
+                <div className="pointer-events-none absolute inset-0 -z-10 rounded-xl opacity-0 transition-opacity duration-500 group-hover:opacity-100">
+                  <div className="absolute inset-0 rounded-xl bg-gradient-to-tr from-purple-500/20 via-transparent to-pink-500/20 blur-xl" />
                 </div>
               </Card>
             </Link>
@@ -96,12 +91,15 @@ export default function OngoingCard({
 
         {/* See All Button */}
         {seeAllLink && (
-          <CardFooter className="mt-6 flex justify-end">
+          <CardFooter className="mt-8 flex justify-center">
             <Button
+              asChild
               variant="outline"
-              className="rounded-full px-6 py-2 text-sm font-semibold bg-background/80 backdrop-blur-sm border-primary/40 text-primary hover:bg-primary hover:text-primary-foreground transition-all duration-300 transform hover:scale-105 hover:shadow-lg"
+              className="group rounded-full border-purple-500/50 bg-gradient-to-r from-purple-500/10 to-pink-500/10 px-6 py-2 text-sm font-semibold text-purple-300 backdrop-blur-sm transition-all duration-300 hover:scale-105 hover:border-purple-400 hover:bg-purple-500/20 hover:text-purple-100"
             >
-              <Link href={`/${seeAllLink}/1`}>See all →</Link>
+              <Link href={`/${seeAllLink}/1`}>
+                See All Anime →
+              </Link>
             </Button>
           </CardFooter>
         )}
