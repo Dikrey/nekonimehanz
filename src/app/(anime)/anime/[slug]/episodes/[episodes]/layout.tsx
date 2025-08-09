@@ -8,7 +8,7 @@ export async function generateMetadata({ params }: { params: { slug: string, epi
 
   return {
     title: `Watch ${formattedTitle} Episode ${params.episodes} | Otakudesu`,
-    description: `Anime Watch Page for ${formattedTitle} Episode ${params.episodes} | Otakudesu. Build by Rizky Haksono`,
+    description: `Anime Watch Page for ${formattedTitle} Episode ${params.episodes} | Otakudesu. Build by Raihan_official0307`,
   };
 }
 
