@@ -5,6 +5,7 @@ import Image from "next/image";
 import Link from "next/link";
 import SkeletonCard from "@/components/layout/skeleton-card";
 import Typography from "@/components/ui/typography";
+import "./rgb-border.css"; // kita akan bikin animasi RGB di sini
 
 export default function OngoingCard({
   animeHeader,
@@ -18,9 +19,7 @@ export default function OngoingCard({
   if (!animeData) {
     return (
       <>
-        <CardHeader className="text-center font-bold text-3xl tracking-wide">
-          {animeHeader}
-        </CardHeader>
+        <CardHeader className="text-center font-bold">{animeHeader}</CardHeader>
         <SkeletonCard />
       </>
     );
@@ -28,35 +27,34 @@ export default function OngoingCard({
 
   return (
     <>
-      <CardHeader className="text-center font-extrabold text-3xl tracking-wide text-primary">
+      <CardHeader className="text-center font-extrabold text-2xl bg-clip-text text-transparent bg-gradient-to-r from-pink-500 via-purple-500 to-blue-500 animate-pulse">
         {animeHeader}
       </CardHeader>
 
-      <div className="mx-2 grid gap-5 max-[640px]:grid-cols-2 sm:grid-cols-3 md:grid-cols-3 lg:grid-cols-5 xl:grid-cols-5">
+      <div className="mx-2 grid gap-4 max-[640px]:grid-cols-2 sm:grid-cols-3 md:grid-cols-3 lg:grid-cols-5 xl:grid-cols-5">
         {animeData?.map((anime: OnGoingAnimeProps) => (
           <Link href={`/anime/${anime.slug}`} key={anime.slug}>
-            <Card className="group relative overflow-hidden rounded-xl bg-gradient-to-b from-card/40 to-card/80 border border-border backdrop-blur-lg shadow-md hover:shadow-xl transition-all duration-500 h-full">
-              {/* Image */}
-              <div className="relative overflow-hidden">
-                <Image
-                  src={anime.poster}
-                  alt={anime.title}
-                  className="object-cover w-full h-48 sm:h-72 md:h-72 lg:h-72 xl:h-96 rounded-t-xl transition-transform duration-500 group-hover:scale-110"
-                  width={1000}
-                  height={1000}
-                />
-                {/* Overlay info saat hover */}
-                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex flex-col justify-end p-4">
-                  <Typography.P className="text-lg font-bold text-white line-clamp-2">
-                    {anime.title}
-                  </Typography.P>
-                  <Typography.P className="text-sm text-gray-200">
-                    {anime.current_episode} Episodes
-                  </Typography.P>
-                  <Typography.P className="text-sm text-gray-300">
-                    📅 {anime.release_day} — {anime.newest_release_date}
-                  </Typography.P>
-                </div>
+            <Card className="rgb-border rounded-xl overflow-hidden transition-transform duration-500 hover:scale-105 hover:shadow-2xl shadow-lg bg-background">
+              <Image
+                src={anime.poster}
+                alt={anime.title}
+                className="rounded-t-lg object-cover max-[640px]:h-36 sm:h-80 md:h-72 lg:h-72 xl:h-96 w-full"
+                width={1000}
+                height={1000}
+              />
+              <div className="mt-4 flex-1 space-y-2 px-4 pb-4">
+                <Typography.P className="text-lg font-bold bg-clip-text text-transparent bg-gradient-to-r from-yellow-400 via-pink-500 to-purple-500">
+                  {anime.title}
+                </Typography.P>
+                <Typography.P className="pt-2 text-sm">
+                  📺 <span className="font-semibold">Total Episode:</span> {anime.current_episode}
+                </Typography.P>
+                <Typography.P className="text-sm">
+                  📅 <span className="font-semibold">Release Day:</span> {anime.release_day}
+                </Typography.P>
+                <Typography.P className="text-sm">
+                  ⏳ <span className="font-semibold">Release Date:</span> {anime.newest_release_date}
+                </Typography.P>
               </div>
             </Card>
           </Link>
@@ -64,14 +62,13 @@ export default function OngoingCard({
       </div>
 
       {seeAllLink && (
-        <CardFooter className="mt-6 flex justify-center">
-          <Link href={`/${seeAllLink}/1`}>
-            <Button
-              className="rounded-full px-6 py-2 bg-gradient-to-r from-purple-500 via-pink-500 to-red-500 text-white font-semibold shadow-lg hover:shadow-xl hover:scale-105 transition-all"
-            >
-              See all →
-            </Button>
-          </Link>
+        <CardFooter className="mt-4 flex justify-end">
+          <Button
+            variant={"secondary"}
+            className="hover:scale-105 transition-transform duration-300 shadow-md hover:shadow-xl"
+          >
+            <Link href={`/${seeAllLink}/1`}>🔍 See all</Link>
+          </Button>
         </CardFooter>
       )}
     </>
