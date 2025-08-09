@@ -2,11 +2,11 @@
 
 ## Introduction
 
-An Otakudesu Frontend. Data from [Otakudesu API](https://github.com/rizkyhaksono/otakudesu-be)
+An Otakudesu Frontend. Data from [Otakudesu API](https://github.com/Dikrey/)
 
 ## Star History
 
-[![Star History Chart](https://api.star-history.com/svg?repos=rizkyhaksono/otakudesu-fe&type=Date)](https://star-history.com/#rizkyhaksono/otakudesu-fe&Date)
+[![Star History Chart](https://api.star-history.com/svg?repos=Dikrey/nekonimehanz&type=Date)](https://star-history.com/#Dikrey/nekonimehanz&Date)
 
 ## Page Speed Insight
 
@@ -63,11 +63,11 @@ This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-opti
 
 ## Website URL
 
-<https://otakudesu.natee.my.id/>
+<https://nekonimehanz.vercel.app/>
 
 ## Contributors
 
-[rizkyhaksono](https://github.com/rizkyhaksono)
+[rizkyhaksono](https://github.com/Dikrey)
 
 ## LICENSE
 
