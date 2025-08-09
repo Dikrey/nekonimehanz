@@ -12,6 +12,9 @@ export default function GreetingLayout() {
             <span className="block bg-gradient-to-r from-green-400 via-blue-500 to-purple-600 bg-clip-text py-2 text-transparent lg:inline">
               Anime Like Never Before
             </span>
+           <span className="block bg-gradient-to-r from-purple-400 via-pink-500 to-red-500 bg-clip-text py-2 text-transparent lg:inline">
+            NEKONIME BY: HANZ
+          </span>
           </h1>
 
           <p className="mb-8 text-lg font-medium text-foreground/90 md:text-xl lg:px-16">
