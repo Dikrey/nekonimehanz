@@ -72,57 +72,60 @@ export default function LastWatched() {
       )}
 
       <CardContent>
-        {lastWatched.length > 0 ? (
-          <div className="grid gap-6 md:grid-cols-2">
-            {lastWatched.map((episode: any) => (
-              <Card
-                key={episode.router}
-                className="bg-white/10 border border-white/20 backdrop-blur-lg rounded-xl shadow-lg hover:shadow-2xl transition-all hover:scale-[1.02] overflow-hidden"
-              >
+          {lastWatched.length > 0 ? (
+    // Bungkus grid dengan div scrollable
+    <div className="max-h-[500px] overflow-y-auto pr-2">
+      <div className="grid gap-6 md:grid-cols-2">
+        {lastWatched.map((episode: any) => (
+          <Card
+            key={episode.router}
+            className="bg-white/10 border border-white/20 backdrop-blur-lg rounded-xl shadow-lg hover:shadow-2xl transition-all hover:scale-[1.02] overflow-hidden"
+          >
+            <Link href={episode.episode}>
+              <Image
+                src={episode.poster}
+                className="object-cover w-full h-48"
+                width={400}
+                height={200}
+                alt="Poster Last Watched"
+              />
+            </Link>
+            <div className="px-4 py-3">
+              <Typography.P className="text-lg font-semibold text-white truncate">
+                {episode.title}
+              </Typography.P>
+              {episode.description && (
+                <p className="text-gray-300 text-sm line-clamp-3 mt-1">
+                  {episode.description}
+                </p>
+              )}
+              {episode.genre && (
+                <p className="text-xs text-purple-300 mt-2">
+                  {episode.genre.join(", ")}
+                </p>
+              )}
+              <div className="flex justify-between items-center mt-3">
                 <Link href={episode.episode}>
-                  <Image
-                    src={episode.poster}
-                    className="object-cover w-full h-48"
-                    width={400}
-                    height={200}
-                    alt="Poster Last Watched"
-                  />
+                  <Button className="bg-gradient-to-r from-purple-500 to-pink-500 text-white rounded-full px-4 py-1 text-xs shadow hover:shadow-lg">
+                    ▶ Continue
+                  </Button>
                 </Link>
-                <div className="px-4 py-3">
-                  <Typography.P className="text-lg font-semibold text-white truncate">
-                    {episode.title}
-                  </Typography.P>
-                  {episode.description && (
-                    <p className="text-gray-300 text-sm line-clamp-3 mt-1">
-                      {episode.description}
-                    </p>
-                  )}
-                  {episode.genre && (
-                    <p className="text-xs text-purple-300 mt-2">
-                      {episode.genre.join(", ")}
-                    </p>
-                  )}
-                  <div className="flex justify-between items-center mt-3">
-                    <Link href={episode.episode}>
-                      <Button className="bg-gradient-to-r from-purple-500 to-pink-500 text-white rounded-full px-4 py-1 text-xs shadow hover:shadow-lg">
-                        ▶ Continue
-                      </Button>
-                    </Link>
-                    {episode.rating && (
-                      <span className="text-yellow-400 text-sm">
-                        ⭐ {episode.rating}
-                      </span>
-                    )}
-                  </div>
-                </div>
-              </Card>
-            ))}
-          </div>
-        ) : (
-          <Typography.P className="text-gray-400 text-center py-8">
-            No episode watched yet
-          </Typography.P>
-        )}
+                {episode.rating && (
+                  <span className="text-yellow-400 text-sm">
+                    ⭐ {episode.rating}
+                  </span>
+                )}
+              </div>
+            </div>
+          </Card>
+        ))}
+      </div>
+    </div>
+  ) : (
+    <Typography.P className="text-gray-400 text-center py-8">
+      No episode watched yet
+    </Typography.P>
+  )}
 
         {/* Delete All Button */}
         {lastWatched.length > 0 && (
