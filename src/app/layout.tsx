@@ -38,12 +38,6 @@ export default function RootLayout({
           crossOrigin="anonymous"
           strategy="afterInteractive"
         />
-        {/* Adsterra Invoke */}
-        <Script
-          async
-          src="//brunetteeffaceduring.com/f421c02148dfa88ebce2e6b8b34d260a/invoke.js"
-          strategy="afterInteractive"
-        />
       </head>
       <body
         suppressHydrationWarning={true}
@@ -52,11 +46,8 @@ export default function RootLayout({
           fontInter.className
         )}
       >
-
-
-        <div id="container-f421c02148dfa88ebce2e6b8b34d260a"></div>
         <ProviderLayout>{children}</ProviderLayout>
       </body>
     </html>
   );
-} 
+}
