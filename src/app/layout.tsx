@@ -38,7 +38,12 @@ export default function RootLayout({
           crossOrigin="anonymous"
           strategy="afterInteractive"
         />
-        <script async="async" data-cfasync="false" src="//brunetteeffaceduring.com/f421c02148dfa88ebce2e6b8b34d260a/invoke.js"/>
+        {/* Adsterra Invoke */}
+        <Script
+          async
+          src="//brunetteeffaceduring.com/f421c02148dfa88ebce2e6b8b34d260a/invoke.js"
+          strategy="afterInteractive"
+        />
       </head>
       <body
         suppressHydrationWarning={true}
