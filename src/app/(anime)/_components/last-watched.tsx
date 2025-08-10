@@ -45,13 +45,13 @@ export default function LastWatched() {
   };
 
   return (
-    <Card className="border-none shadow-xl rounded-2xl overflow-hidden bg-gradient-to-b from-gray-900/70 to-gray-800/50 backdrop-blur-xl">
-      {/* Header + Level */}
-      <CardHeader className="text-center text-3xl font-extrabold relative text-white">
+    <Card className="border-none shadow-xl rounded-2xl overflow-hidden bg-gradient-to-br from-[#1f1f2e] via-[#25253d] to-[#1a1a29] text-white">
+      {/* Header */}
+      <CardHeader className="text-center text-3xl font-extrabold relative py-6">
         🎬 Last Watched
         {level > 0 && (
-          <span className="absolute right-4 top-4 bg-gradient-to-r from-fuchsia-500 to-pink-500 text-white text-sm px-4 py-1 rounded-full shadow-md animate-pulse">
-            Level {level}
+          <span className="absolute right-4 top-6 bg-gradient-to-r from-purple-500 to-pink-500 text-white text-sm px-3 py-1 rounded-full shadow-md">
+           Wibu Level {level}
           </span>
         )}
       </CardHeader>
@@ -59,14 +59,14 @@ export default function LastWatched() {
       {/* Progress Bar */}
       {level > 0 && (
         <div className="px-6 mb-6">
-          <div className="w-full h-3 bg-gray-700/50 rounded-full overflow-hidden">
+          <div className="w-full bg-white/20 h-3 rounded-full overflow-hidden backdrop-blur-md">
             <div
-              className="h-full bg-gradient-to-r from-green-400 via-emerald-500 to-teal-500 transition-all duration-500"
+              className="h-full bg-gradient-to-r from-green-400 to-green-600 transition-all duration-500"
               style={{ width: `${progress}%` }}
-            />
+            ></div>
           </div>
           <p className="text-sm text-gray-300 mt-1 text-center">
-            {level}/{maxLevel} Episodes to next level
+           Level {level}/{maxLevel} Episodes to next level
           </p>
         </div>
       )}
@@ -85,25 +85,45 @@ export default function LastWatched() {
               lastWatched.map((episode: any) => (
                 <Card
                   key={episode.router}
-                  className="overflow-hidden rounded-xl border border-white/10 bg-white/5 shadow-lg hover:shadow-2xl hover:scale-[1.03] hover:rotate-[0.5deg] transition-all duration-500 backdrop-blur-lg"
+                  className="bg-white/10 border border-white/20 backdrop-blur-lg rounded-xl shadow-lg hover:shadow-2xl transition-all hover:scale-[1.03] min-w-[240px]"
                 >
                   <Link href={episode.episode}>
-                    <div className="relative overflow-hidden">
-                      <Image
-                        src={episode.poster}
-                        className="object-cover w-60 h-40 sm:h-72 md:h-72 lg:h-72 rounded-t-xl transition-transform duration-500 hover:scale-110"
-                        width={200}
-                        height={100}
-                        loading="lazy"
-                        alt="Poster Last Watched"
-                      />
-                      <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent opacity-0 hover:opacity-100 transition-opacity duration-500 flex items-end p-3">
-                        <Typography.P className="text-white font-medium">
-                          {episode.title}
-                        </Typography.P>
-                      </div>
-                    </div>
+                    <Image
+                      src={episode.poster}
+                      className="object-cover w-full h-40 sm:h-60 rounded-t-xl"
+                      width={240}
+                      height={150}
+                      loading="lazy"
+                      alt="Poster Last Watched"
+                    />
                   </Link>
+                  <div className="px-3 py-3">
+                    <Typography.P className="text-lg font-semibold text-white truncate">
+                      {episode.title}
+                    </Typography.P>
+                    {episode.description && (
+                      <p className="text-gray-300 text-sm line-clamp-3 mt-1">
+                        {episode.description}
+                      </p>
+                    )}
+                    {episode.genre && (
+                      <p className="text-xs text-purple-300 mt-2">
+                        {episode.genre.join(", ")}
+                      </p>
+                    )}
+                    <div className="flex justify-between items-center mt-3">
+                      <Link href={episode.episode}>
+                        <Button className="bg-gradient-to-r from-purple-500 to-pink-500 text-white rounded-full px-4 py-1 text-xs shadow hover:shadow-lg">
+                          ▶ Continue
+                        </Button>
+                      </Link>
+                      {episode.rating && (
+                        <span className="text-yellow-400 text-sm">
+                          ⭐ {episode.rating}
+                        </span>
+                      )}
+                    </div>
+                  </div>
                 </Card>
               ))
             ) : (
@@ -122,25 +142,27 @@ export default function LastWatched() {
               <AlertDialogTrigger asChild>
                 <Button
                   variant="destructive"
-                  className="rounded-full px-8 py-2 shadow-lg hover:shadow-xl hover:scale-105 transition-all bg-gradient-to-r from-red-500 to-rose-600 text-white"
+                  className="rounded-full px-6 py-2 bg-gradient-to-r from-red-500 to-red-700 text-white shadow hover:shadow-lg hover:scale-105 transition-all"
                 >
                   🗑 Delete All
                 </Button>
               </AlertDialogTrigger>
-              <AlertDialogContent className="bg-gray-900 text-white border border-white/10">
+              <AlertDialogContent className="bg-[#1f1f2e] text-white border border-white/20 rounded-xl">
                 <AlertDialogHeader>
-                  <AlertDialogTitle>Are you sure?</AlertDialogTitle>
-                  <AlertDialogDescription className="text-gray-400">
+                  <AlertDialogTitle className="text-lg font-bold">
+                    Are you sure?
+                  </AlertDialogTitle>
+                  <AlertDialogDescription className="text-gray-300">
                     This will delete all episodes you have watched.
                   </AlertDialogDescription>
                 </AlertDialogHeader>
                 <AlertDialogFooter>
-                  <AlertDialogCancel className="bg-gray-700 hover:bg-gray-600">
+                  <AlertDialogCancel className="bg-gray-700 text-white hover:bg-gray-600">
                     Cancel
                   </AlertDialogCancel>
                   <AlertDialogAction
                     onClick={handleDeleteAllEpisode}
-                    className="bg-red-500 hover:bg-red-600"
+                    className="bg-red-600 hover:bg-red-700 text-white"
                   >
                     Continue
                   </AlertDialogAction>
