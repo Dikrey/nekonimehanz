@@ -1,4 +1,4 @@
-import Script from "next/script"; // tambahkan import ini di paling atas
+
 import Link from "next/link";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import {
@@ -63,9 +63,7 @@ export default function TVSeries({
           />
         </div>
 
-         <div className="my-6">
-          <script type='text/javascript' src='//brunetteeffaceduring.com/60/83/5b/60835bd5d4447f2da96b90de39b99525.js'></script>
-        </div>
+      
 
         {/* Controls: Previous, Episode Select, Provider, Next */}
         <div className="grid grid-cols-1 gap-3 sm:grid-cols-4 md:gap-4">
