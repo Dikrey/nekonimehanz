@@ -46,7 +46,7 @@ export default function LastWatched() {
 
   return (
   <Card className="border-none shadow-xl rounded-2xl overflow-hidden bg-gradient-to-br from-[#1f1f2e] via-[#25253d] to-[#1a1a29] text-white max-w-4xl mx-auto">
-    {/* Header + Level */}
+    {/* Header + Level; */}
     <CardHeader className="text-center py-6">
       <h2 className="text-3xl font-extrabold">🎬 Last Watched</h2>
 
