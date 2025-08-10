@@ -50,7 +50,7 @@ export default function LastWatched() {
       <CardHeader className="text-center text-3xl font-extrabold relative py-6">
         🎬 Last Watched
         {level > 0 && (
-          <span className="absolute right-4 top-6 bg-gradient-to-r from-purple-500 to-pink-500 text-white text-sm px-3 py-1 rounded-full shadow-md">
+         <br> <span className="absolute right-4 top-6 bg-gradient-to-r from-purple-500 to-pink-500 text-white text-sm px-3 py-1 rounded-full shadow-md">
            Wibu Level {level}
           </span>
         )}
