@@ -18,7 +18,12 @@ export default function GreetingLayout() {
               NEKONIMEHANZ
             </span>
 
-            {/* Ikon media sosial */}
+          </h1>
+
+          <p className="mb-8 text-lg font-medium text-foreground/90 md:text-xl lg:px-16">
+            Dive into a vast collection of anime, handpicked and streamed with love.
+            Built by fans, for fans — <strong>ad-free, fast, and free</strong>.
+             {/* Ikon media sosial */}
             <div className="mt-4 flex justify-center gap-4 text-2xl">
               <Link
                 href="https://tiktok.com/@raihan_official0307"
@@ -49,11 +54,6 @@ export default function GreetingLayout() {
                 <FaTelegramPlane />
               </Link>
             </div>
-          </h1>
-
-          <p className="mb-8 text-lg font-medium text-foreground/90 md:text-xl lg:px-16">
-            Dive into a vast collection of anime, handpicked and streamed with love.
-            Built by fans, for fans — <strong>ad-free, fast, and free</strong>.
           </p>
 
           <div className="mb-6 flex flex-col justify-center gap-4 sm:flex-row md:mb-10">
