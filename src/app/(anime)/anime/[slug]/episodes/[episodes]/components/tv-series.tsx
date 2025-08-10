@@ -63,6 +63,9 @@ export default function TVSeries({
           />
         </div>
 
+            {/* Container iklan Adsterra Invoke */}
+        <div id="container-f421c02148dfa88ebce2e6b8b34d260a"></div>
+
       
 
         {/* Controls: Previous, Episode Select, Provider, Next */}
