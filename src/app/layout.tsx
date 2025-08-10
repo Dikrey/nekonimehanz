@@ -21,7 +21,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <head>
-        <meta name="google-adsense-account" content="ca-pub-1048374829701737">
+        <meta name="google-adsense-account" content="ca-pub-1048374829701737"/>
         {/* Verifikasi Monetag */}
         <meta name="monetag" content="e7795eae5700719ce0489a0e1d683030" />
 
