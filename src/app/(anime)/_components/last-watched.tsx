@@ -45,17 +45,18 @@ export default function LastWatched() {
   };
 
   return (
-    <Card className="border-none shadow-xl rounded-2xl overflow-hidden bg-gradient-to-br from-[#1f1f2e] via-[#25253d] to-[#1a1a29] text-white max-w-4xl mx-auto">
-      {/* Header + Level */}
-      <CardHeader className="text-center text-3xl font-extrabold relative py-6">
-        🎬 Last Watched
-        {level > 0 && (
-         <br> <span className="absolute right-4 top-6 bg-gradient-to-r from-purple-500 to-pink-500 text-white text-sm px-3 py-1 rounded-full shadow-md">
-           Wibu Level {level}
-          </span>
-        )}
-      </CardHeader>
+  <Card className="border-none shadow-xl rounded-2xl overflow-hidden bg-gradient-to-br from-[#1f1f2e] via-[#25253d] to-[#1a1a29] text-white max-w-4xl mx-auto">
+    {/* Header + Level */}
+    <CardHeader className="text-center py-6">
+      <h2 className="text-3xl font-extrabold">🎬 Last Watched</h2>
 
+      {level > 0 && (
+        <span className="mt-2 inline-block bg-gradient-to-r from-purple-500 to-pink-500 text-white text-sm px-3 py-1 rounded-full shadow-md">
+          Wibu Level {level}
+        </span>
+      )}
+    </CardHeader>
+    
       {/* Progress Bar */}
       {level > 0 && (
         <div className="px-6 mb-6">
