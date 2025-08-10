@@ -1,10 +1,10 @@
 import Link from "next/link";
 import { FaSearch } from "react-icons/fa";
 import { FaArrowRight } from "react-icons/fa6";
+import { FaTiktok, FaInstagram, FaFacebookF, FaTelegramPlane } from "react-icons/fa"; // Tambahan icon
 
 export default function GreetingLayout() {
   return (
-
     <section className="pt-10">
       <div className="mx-auto max-w-7xl px-12">
         <div className="mx-auto w-full text-left md:w-11/12 md:text-center xl:w-9/12">
@@ -12,14 +12,47 @@ export default function GreetingLayout() {
             <span>Discover the magic of&nbsp;</span>
             <span className="block bg-gradient-to-r from-green-400 via-blue-500 to-purple-600 bg-clip-text py-2 text-transparent lg:inline">
               Anime Like Never Before
-            </span><br></br>
-           <span className="block bg-gradient-to-r from-purple-400 via-pink-500 to-red-500 bg-clip-text py-2 text-transparent lg:inline">
-            NEKONIMEHANZ
-          </span>
+            </span>
+            <br />
+            <span className="block bg-gradient-to-r from-purple-400 via-pink-500 to-red-500 bg-clip-text py-2 text-transparent lg:inline">
+              NEKONIMEHANZ
+            </span>
+
+            {/* Ikon media sosial */}
+            <div className="mt-4 flex justify-center gap-4 text-2xl">
+              <Link
+                href="https://tiktok.com/@raihan_official0307"
+                target="_blank"
+                className="transition-all hover:scale-110 hover:text-black dark:hover:text-white"
+              >
+                <FaTiktok />
+              </Link>
+              <Link
+                href="https://instagram.com/muhammad_raihan0307"
+                target="_blank"
+                className="transition-all hover:scale-110 hover:text-pink-500"
+              >
+                <FaInstagram />
+              </Link>
+              <Link
+                href="https://www.facebook.com/profile.php?id=100049899516284"
+                target="_blank"
+                className="transition-all hover:scale-110 hover:text-blue-600"
+              >
+                <FaFacebookF />
+              </Link>
+              <Link
+                href="https://t.me/raihan_official0307"
+                target="_blank"
+                className="transition-all hover:scale-110 hover:text-sky-500"
+              >
+                <FaTelegramPlane />
+              </Link>
+            </div>
           </h1>
 
           <p className="mb-8 text-lg font-medium text-foreground/90 md:text-xl lg:px-16">
-            Dive into a vast collection of anime, handpicked and streamed with love. 
+            Dive into a vast collection of anime, handpicked and streamed with love.
             Built by fans, for fans — <strong>ad-free, fast, and free</strong>.
           </p>
 
@@ -40,12 +73,15 @@ export default function GreetingLayout() {
             </Link>
           </div>
 
-          {/* Kredit Pembuat – Tetap estetik dan menyatu */}
           <p className="mt-10 text-center text-sm font-light text-gray-500 dark:text-gray-400">
             Crafted with passion by{" "}
-            <span className="font-semibold text-blue-600 dark:text-blue-300">Raihan_official0307</span>{" "}
+            <span className="font-semibold text-blue-600 dark:text-blue-300">
+              Raihan_official0307
+            </span>{" "}
             &{" "}
-            <span className="font-semibold text-purple-600 dark:text-purple-300">Visualcodepo</span>
+            <span className="font-semibold text-purple-600 dark:text-purple-300">
+              Visualcodepo
+            </span>
           </p>
         </div>
       </div>
