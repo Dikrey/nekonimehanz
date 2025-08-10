@@ -73,7 +73,7 @@ export default function LastWatched() {
 
       <CardContent>
         {lastWatched.length > 0 ? (
-          <div className="grid gap-6 md:grid-cols-2 max-h-[600px] overflow-y-auto pr-2">
+          <div className="grid gap-6 md:grid-cols-2">
             {lastWatched.map((episode: any) => (
               <Card
                 key={episode.router}
