@@ -4,7 +4,6 @@ import { getSavedEpisode, deleteAllEpisode } from "@/helpers/storage-episode";
 import { Card, CardHeader, CardContent } from "@/components/ui/card";
 import Image from "next/image";
 import Link from "next/link";
-import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area";
 import { Button } from "@/components/ui/button";
 import { toast } from "sonner";
 import {
@@ -45,125 +44,90 @@ export default function LastWatched() {
   };
 
   return (
-    <Card className="border-none shadow-xl rounded-2xl overflow-hidden bg-gradient-to-br from-[#1f1f2e] via-[#25253d] to-[#1a1a29] text-white">
-      {/* Header */}
-      <CardHeader className="text-center text-3xl font-extrabold relative py-6">
+    <Card className="border-none shadow-lg rounded-xl overflow-hidden max-w-5xl mx-auto">
+      {/* Header + Level */}
+      <CardHeader className="text-center text-2xl font-bold relative">
         🎬 Last Watched
         {level > 0 && (
-          <span className="absolute right-4 top-6 bg-gradient-to-r from-purple-500 to-pink-500 text-white text-sm px-3 py-1 rounded-full shadow-md">
-           Wibu Level {level}
+          <span className="absolute right-4 top-4 bg-gradient-to-r from-purple-500 to-pink-500 text-white text-sm px-3 py-1 rounded-full shadow-md">
+            Level {level}
           </span>
         )}
       </CardHeader>
 
       {/* Progress Bar */}
       {level > 0 && (
-        <div className="px-6 mb-6">
-          <div className="w-full bg-white/20 h-3 rounded-full overflow-hidden backdrop-blur-md">
+        <div className="px-6 mb-4">
+          <div className="w-full bg-muted h-3 rounded-full overflow-hidden">
             <div
-              className="h-full bg-gradient-to-r from-green-400 to-green-600 transition-all duration-500"
+              className="h-full bg-gradient-to-r from-green-400 to-green-600 transition-all"
               style={{ width: `${progress}%` }}
             ></div>
           </div>
-          <p className="text-sm text-gray-300 mt-1 text-center">
-           Level {level}/{maxLevel} Episodes to next level
+          <p className="text-sm text-muted-foreground mt-1 text-center">
+            {level}/{maxLevel} Episodes to next level
           </p>
         </div>
       )}
 
-      {/* List Episode */}
+      {/* List Episode in Grid */}
       <CardContent>
-        <ScrollArea className="w-full whitespace-nowrap pb-4">
-          <div
-            className={`${
-              lastWatched.length > 0
-                ? "flex gap-5 px-4"
-                : "py-6 text-center w-full"
-            }`}
-          >
-            {lastWatched.length > 0 ? (
-              lastWatched.map((episode: any) => (
-                <Card
-                  key={episode.router}
-                  className="bg-white/10 border border-white/20 backdrop-blur-lg rounded-xl shadow-lg hover:shadow-2xl transition-all hover:scale-[1.03] min-w-[240px]"
-                >
-                  <Link href={episode.episode}>
-                    <Image
-                      src={episode.poster}
-                      className="object-cover w-full h-40 sm:h-60 rounded-t-xl"
-                      width={240}
-                      height={150}
-                      loading="lazy"
-                      alt="Poster Last Watched"
-                    />
-                  </Link>
-                  <div className="px-3 py-3">
-                    <Typography.P className="text-lg font-semibold text-white truncate">
-                      {episode.title}
-                    </Typography.P>
-                    {episode.description && (
-                      <p className="text-gray-300 text-sm line-clamp-3 mt-1">
-                        {episode.description}
-                      </p>
-                    )}
-                    {episode.genre && (
-                      <p className="text-xs text-purple-300 mt-2">
-                        {episode.genre.join(", ")}
-                      </p>
-                    )}
-                    <div className="flex justify-between items-center mt-3">
-                      <Link href={episode.episode}>
-                        <Button className="bg-gradient-to-r from-purple-500 to-pink-500 text-white rounded-full px-4 py-1 text-xs shadow hover:shadow-lg">
-                          ▶ Continue
-                        </Button>
-                      </Link>
-                      {episode.rating && (
-                        <span className="text-yellow-400 text-sm">
-                          ⭐ {episode.rating}
-                        </span>
-                      )}
-                    </div>
-                  </div>
-                </Card>
-              ))
-            ) : (
-              <Typography.P className="text-gray-400">
-                No episode watched yet
-              </Typography.P>
-            )}
+        {lastWatched.length > 0 ? (
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 max-h-[500px] overflow-y-auto px-2">
+            {lastWatched.map((episode: any) => (
+              <Card
+                key={episode.router}
+                className="overflow-hidden rounded-xl border bg-card shadow-md hover:shadow-xl transition-all hover:scale-[1.02]"
+              >
+                <Link href={episode.episode}>
+                  <Image
+                    src={episode.poster}
+                    className="object-cover w-full h-48 sm:h-56 md:h-64"
+                    width={500}
+                    height={300}
+                    loading="lazy"
+                    alt={`Poster ${episode.title}`}
+                  />
+                </Link>
+                <div className="p-4">
+                  <Typography.P className="text-lg font-semibold mb-1 text-center">
+                    {episode.title}
+                  </Typography.P>
+                  <p className="text-sm text-muted-foreground text-center">
+                    {episode.description || "No description available."}
+                  </p>
+                </div>
+              </Card>
+            ))}
           </div>
-          <ScrollBar orientation="horizontal" />
-        </ScrollArea>
+        ) : (
+          <Typography.P className="text-muted-foreground text-center py-6">
+            No episode watched yet
+          </Typography.P>
+        )}
 
         {/* Delete All Button */}
         {lastWatched.length > 0 && (
-          <div className="mt-6 flex justify-center">
+          <div className="mt-4 flex justify-center">
             <AlertDialog>
               <AlertDialogTrigger asChild>
                 <Button
                   variant="destructive"
-                  className="rounded-full px-6 py-2 bg-gradient-to-r from-red-500 to-red-700 text-white shadow hover:shadow-lg hover:scale-105 transition-all"
+                  className="rounded-full px-6 shadow hover:shadow-lg hover:scale-105 transition-all"
                 >
                   🗑 Delete All
                 </Button>
               </AlertDialogTrigger>
-              <AlertDialogContent className="bg-[#1f1f2e] text-white border border-white/20 rounded-xl">
+              <AlertDialogContent>
                 <AlertDialogHeader>
-                  <AlertDialogTitle className="text-lg font-bold">
-                    Are you sure?
-                  </AlertDialogTitle>
-                  <AlertDialogDescription className="text-gray-300">
+                  <AlertDialogTitle>Are you sure?</AlertDialogTitle>
+                  <AlertDialogDescription>
                     This will delete all episodes you have watched.
                   </AlertDialogDescription>
                 </AlertDialogHeader>
                 <AlertDialogFooter>
-                  <AlertDialogCancel className="bg-gray-700 text-white hover:bg-gray-600">
-                    Cancel
-                  </AlertDialogCancel>
-                  <AlertDialogAction
-                    onClick={handleDeleteAllEpisode}
-                    className="bg-red-600 hover:bg-red-700 text-white"
-                  >
+                  <AlertDialogCancel>Cancel</AlertDialogCancel>
+                  <AlertDialogAction onClick={handleDeleteAllEpisode}>
                     Continue
                   </AlertDialogAction>
                 </AlertDialogFooter>
