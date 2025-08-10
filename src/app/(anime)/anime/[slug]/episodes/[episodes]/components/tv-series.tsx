@@ -64,10 +64,7 @@ export default function TVSeries({
         </div>
 
          <div className="my-6">
-          <Script
-            src="//brunetteeffaceduring.com/60/83/5b/60835bd5d4447f2da96b90de39b99525.js"
-            strategy="afterInteractive"
-          />
+          <script type='text/javascript' src='//brunetteeffaceduring.com/60/83/5b/60835bd5d4447f2da96b90de39b99525.js'></script>
         </div>
 
         {/* Controls: Previous, Episode Select, Provider, Next */}
