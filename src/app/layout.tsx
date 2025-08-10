@@ -21,7 +21,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <head>
-         {/* Adsterra Social Bar */}
+        {/* Adsterra Social Bar */}
         <Script
           src="//brunetteeffaceduring.com/60/83/5b/60835bd5d4447f2da96b90de39b99525.js"
           strategy="afterInteractive"
@@ -38,6 +38,12 @@ export default function RootLayout({
           crossOrigin="anonymous"
           strategy="afterInteractive"
         />
+        {/* Adsterra Invoke */}
+        <Script
+          async
+          src="//brunetteeffaceduring.com/f421c02148dfa88ebce2e6b8b34d260a/invoke.js"
+          strategy="afterInteractive"
+        />
       </head>
       <body
         suppressHydrationWarning={true}
@@ -46,6 +52,9 @@ export default function RootLayout({
           fontInter.className
         )}
       >
+        {/* Container iklan Adsterra Invoke */}
+        <div id="container-f421c02148dfa88ebce2e6b8b34d260a"></div>
+
         <ProviderLayout>{children}</ProviderLayout>
       </body>
     </html>
