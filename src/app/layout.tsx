@@ -21,6 +21,8 @@ export default function RootLayout({
   return (
     <html lang="en">
       <head>
+          {/* Verifikasi Monetag */}
+  <meta name="monetag" content="e7795eae5700719ce0489a0e1d683030" />
          {/* Adsterra Social Bar */}
         <Script
           src="//brunetteeffaceduring.com/60/83/5b/60835bd5d4447f2da96b90de39b99525.js"
