@@ -52,8 +52,6 @@ export default function RootLayout({
           fontInter.className
         )}
       >
-        {/* Container iklan Adsterra Invoke */}
-        <div id="container-f421c02148dfa88ebce2e6b8b34d260a"></div>
 
         <ProviderLayout>{children}</ProviderLayout>
       </body>
