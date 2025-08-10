@@ -21,6 +21,16 @@ export default function RootLayout({
   return (
     <html lang="en">
       <head>
+         {/* Adsterra Social Bar */}
+        <Script
+          src="//brunetteeffaceduring.com/60/83/5b/60835bd5d4447f2da96b90de39b99525.js"
+          strategy="afterInteractive"
+        />
+        {/* Adsterra Popunder */}
+        <Script
+          src="//brunetteeffaceduring.com/cf/3f/04/cf3f04cbe3364c0d3700e5faf6e388e4.js"
+          strategy="afterInteractive"
+        />
         {/* Script Iklan AdSense Global */}
         <Script
           async
