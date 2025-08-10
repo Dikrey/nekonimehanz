@@ -4,8 +4,7 @@ import { FaArrowRight } from "react-icons/fa6";
 
 export default function GreetingLayout() {
   return (
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1048374829701737"
-     crossorigin="anonymous"></script>
+
     <section className="pt-10">
       <div className="mx-auto max-w-7xl px-12">
         <div className="mx-auto w-full text-left md:w-11/12 md:text-center xl:w-9/12">
