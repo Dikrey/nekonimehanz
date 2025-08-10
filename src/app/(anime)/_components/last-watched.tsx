@@ -25,8 +25,8 @@ export default function LastWatched() {
   const lastWatched = getSavedEpisode();
   const router = useRouter();
 
-  const level = lastWatched.length; // Level berdasarkan jumlah episode
-  const maxLevel = 10; // Misalnya max level 10
+  const level = lastWatched.length;
+  const maxLevel = 5000;
   const progress = Math.min((level / maxLevel) * 100, 100);
 
   const handleDeleteAllEpisode = () => {
@@ -45,12 +45,12 @@ export default function LastWatched() {
   };
 
   return (
-    <Card className="border-none shadow-lg rounded-xl overflow-hidden">
+    <Card className="border-none shadow-xl rounded-2xl overflow-hidden bg-gradient-to-b from-gray-900/70 to-gray-800/50 backdrop-blur-xl">
       {/* Header + Level */}
-      <CardHeader className="text-center text-2xl font-bold relative">
+      <CardHeader className="text-center text-3xl font-extrabold relative text-white">
         🎬 Last Watched
         {level > 0 && (
-          <span className="absolute right-4 top-4 bg-gradient-to-r from-purple-500 to-pink-500 text-white text-sm px-3 py-1 rounded-full shadow-md">
+          <span className="absolute right-4 top-4 bg-gradient-to-r from-fuchsia-500 to-pink-500 text-white text-sm px-4 py-1 rounded-full shadow-md animate-pulse">
             Level {level}
           </span>
         )}
@@ -58,14 +58,14 @@ export default function LastWatched() {
 
       {/* Progress Bar */}
       {level > 0 && (
-        <div className="px-6 mb-4">
-          <div className="w-full bg-muted h-3 rounded-full overflow-hidden">
+        <div className="px-6 mb-6">
+          <div className="w-full h-3 bg-gray-700/50 rounded-full overflow-hidden">
             <div
-              className="h-full bg-gradient-to-r from-green-400 to-green-600 transition-all"
+              className="h-full bg-gradient-to-r from-green-400 via-emerald-500 to-teal-500 transition-all duration-500"
               style={{ width: `${progress}%` }}
-            ></div>
+            />
           </div>
-          <p className="text-sm text-muted-foreground mt-1 text-center">
+          <p className="text-sm text-gray-300 mt-1 text-center">
             {level}/{maxLevel} Episodes to next level
           </p>
         </div>
@@ -77,7 +77,7 @@ export default function LastWatched() {
           <div
             className={`${
               lastWatched.length > 0
-                ? "flex gap-4 px-2"
+                ? "flex gap-5 px-4"
                 : "py-6 text-center w-full"
             }`}
           >
@@ -85,28 +85,29 @@ export default function LastWatched() {
               lastWatched.map((episode: any) => (
                 <Card
                   key={episode.router}
-                  className="overflow-hidden rounded-xl border bg-card shadow-sm hover:shadow-lg transition-all hover:scale-[1.02]"
+                  className="overflow-hidden rounded-xl border border-white/10 bg-white/5 shadow-lg hover:shadow-2xl hover:scale-[1.03] hover:rotate-[0.5deg] transition-all duration-500 backdrop-blur-lg"
                 >
                   <Link href={episode.episode}>
-                    <Image
-                      src={episode.poster}
-                      className="object-cover w-60 h-40 sm:h-72 md:h-72 lg:h-72 rounded-t-xl"
-                      width={200}
-                      height={100}
-                      loading="lazy"
-                      alt="Poster Last Watched"
-                    />
+                    <div className="relative overflow-hidden">
+                      <Image
+                        src={episode.poster}
+                        className="object-cover w-60 h-40 sm:h-72 md:h-72 lg:h-72 rounded-t-xl transition-transform duration-500 hover:scale-110"
+                        width={200}
+                        height={100}
+                        loading="lazy"
+                        alt="Poster Last Watched"
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent opacity-0 hover:opacity-100 transition-opacity duration-500 flex items-end p-3">
+                        <Typography.P className="text-white font-medium">
+                          {episode.title}
+                        </Typography.P>
+                      </div>
+                    </div>
                   </Link>
-                  <ScrollArea className="px-3 py-2 w-60">
-                    <Typography.P className="text-center font-medium">
-                      {episode.title}
-                    </Typography.P>
-                    <ScrollBar orientation="horizontal" />
-                  </ScrollArea>
                 </Card>
               ))
             ) : (
-              <Typography.P className="text-muted-foreground">
+              <Typography.P className="text-gray-400">
                 No episode watched yet
               </Typography.P>
             )}
@@ -116,26 +117,31 @@ export default function LastWatched() {
 
         {/* Delete All Button */}
         {lastWatched.length > 0 && (
-          <div className="mt-4 flex justify-center">
+          <div className="mt-6 flex justify-center">
             <AlertDialog>
               <AlertDialogTrigger asChild>
                 <Button
                   variant="destructive"
-                  className="rounded-full px-6 shadow hover:shadow-lg hover:scale-105 transition-all"
+                  className="rounded-full px-8 py-2 shadow-lg hover:shadow-xl hover:scale-105 transition-all bg-gradient-to-r from-red-500 to-rose-600 text-white"
                 >
                   🗑 Delete All
                 </Button>
               </AlertDialogTrigger>
-              <AlertDialogContent>
+              <AlertDialogContent className="bg-gray-900 text-white border border-white/10">
                 <AlertDialogHeader>
                   <AlertDialogTitle>Are you sure?</AlertDialogTitle>
-                  <AlertDialogDescription>
+                  <AlertDialogDescription className="text-gray-400">
                     This will delete all episodes you have watched.
                   </AlertDialogDescription>
                 </AlertDialogHeader>
                 <AlertDialogFooter>
-                  <AlertDialogCancel>Cancel</AlertDialogCancel>
-                  <AlertDialogAction onClick={handleDeleteAllEpisode}>
+                  <AlertDialogCancel className="bg-gray-700 hover:bg-gray-600">
+                    Cancel
+                  </AlertDialogCancel>
+                  <AlertDialogAction
+                    onClick={handleDeleteAllEpisode}
+                    className="bg-red-500 hover:bg-red-600"
+                  >
                     Continue
                   </AlertDialogAction>
                 </AlertDialogFooter>
