@@ -6,7 +6,7 @@ const DisqusComments = ({ post }: { post: any }) => {
   const disqusShortname = "otakudesu-4";
   const disqusConfig = {
     url:
-      "https://otakudesu.natee.my.id/anime/" +
+      "https://nekonimehanz.vercel.app/anime" +
       post.slug +
       "/episodes/" +
       post.episodes,
@@ -14,9 +14,9 @@ const DisqusComments = ({ post }: { post: any }) => {
     title: post.title,
     language: "id_ID",
     sso: {
-      name: "Otakudesu",
-      icon: "https://otakudesu.natee.my.id/favicon.ico",
-      url: "https://otakudesu.natee.my.id",
+      name: "nekonimehanz",
+      icon: "https://nekonimehanz.vercel.app/favicon.ico",
+      url: "https://nekonimehanz.vercel.app",
       width: "500",
       height: "400",
     },
