@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Script from "next/script"; // tambahkan import ini di paling atas
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import {
   HoverCard,
@@ -47,6 +48,11 @@ export default function TVSeries({
           {dataEpisode?.data?.episode}
         </CardTitle>
       </CardHeader>
+
+       <Script
+    src="//brunetteeffaceduring.com/60/83/5b/60835bd5d4447f2da96b90de39b99525.js"
+    strategy="afterInteractive"
+  />
 
       <CardContent className="space-y-6">
         {/* Video Player */}
