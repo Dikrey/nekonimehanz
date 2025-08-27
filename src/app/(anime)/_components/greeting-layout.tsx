@@ -65,6 +65,13 @@ export default function GreetingLayout() {
               <FaArrowRight />
             </Link>
             <Link
+              href="https://saweria.co/Raihanofficial0307"
+              className="inline-flex w-full items-center justify-center gap-2 rounded-2xl bg-blue-500/20 px-6 py-3 text-lg font-semibold text-blue-700 backdrop-blur-sm transition-all hover:bg-blue-500/30 hover:shadow-lg hover:shadow-blue-300/40 dark:text-blue-400 dark:hover:shadow-blue-500/20 sm:w-auto"
+            >
+              <span>Donasi</span>
+              <FaArrowRight />
+            </Link>
+            <Link
               href="/anime"
               className="inline-flex w-full items-center justify-center gap-2 rounded-2xl bg-gray-100 px-6 py-3 text-lg font-semibold text-gray-800 transition-all hover:bg-gray-200 hover:shadow-lg hover:shadow-gray-300/50 dark:bg-gray-700/60 dark:text-gray-100 dark:hover:bg-gray-700 dark:hover:shadow-gray-500/20 sm:w-auto"
             >
