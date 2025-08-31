@@ -26,7 +26,7 @@ export default function LastWatched() {
 
   // Sistem level
   const level = lastWatched.length;
-  const maxLevel = 5000;
+  const maxLevel = 10000;
   const progress = Math.min((level / maxLevel) * 100, 100);
 
   const handleDeleteAllEpisode = () => {
