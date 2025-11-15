@@ -22,9 +22,9 @@ export default function BaseLayout({ children }: Readonly<{ children: React.Reac
         <div className="mx-4 mt-4">
           <Alert className="border-l-4 border-blue-500 rounded-xl shadow-md">
             <Info className="h-4 w-4" />
-            <AlertTitle className="font-semibold">Informasi</AlertTitle>
+            <AlertTitle className="font-semibold">Informasi Update</AlertTitle>
             <AlertDescription className="text-sm">
-              Website ini sedang dalam tahap pengembangan.
+             Aplikasi telah menerima pembaruan terbaru dan server kini berjalan normal.
             </AlertDescription>
           </Alert>
         </div>
