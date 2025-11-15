@@ -7,7 +7,7 @@ export default function Footer() {
       <p className="text-center text-sm leading-loose text-gray-400 md:text-left">
         Built by{" "}
         <Link
-          href="https://linktr.ee/RaihanDIkrey"
+          href="https://linktr.ee/Visualcodepo"
           target="_blank"
           rel="noreferrer"
           className="font-medium text-white hover:text-purple-400 transition-colors underline underline-offset-4"
